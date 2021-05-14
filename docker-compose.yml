@@ -4,3 +4,4 @@ services:
     build: .
     volumes:
     - .:/code
+    restart: unless-stopped
