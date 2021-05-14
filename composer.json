@@ -2,7 +2,6 @@
   "name": "ricardofiorani/duino-php",
   "type": "project",
   "require": {
-    "ext-sockets": "^8.0",
     "react/socket": "^1.6",
     "php": "^8.0",
     "monolog/monolog": "^2.2"

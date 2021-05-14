@@ -64,7 +64,7 @@ $connector->connect('51.15.127.80:2811')->then(
 
             $start = microtime(true);
             $result = $worker->work((string)$baseHash, (string)$digest, (int)$difficulty);
-            $timeDifference = microtime(true) - $start;
+            $timeDifference = (microtime(true) - $start) / 1000;
 
             $logger->debug('Time difference', [$timeDifference]);
 
@@ -76,8 +76,8 @@ $connector->connect('51.15.127.80:2811')->then(
 
             $logger->info('FOUND!', ['result' => $result]);
 
-            $hashRate = $result / $timeDifference;
-            $logger->info('Current HashRate: ' . $hashRate/100000 . ' MH/s');
+            $hashRate = $result / ($timeDifference);
+            $logger->info('Current HashRate: ' . $hashRate/1000 . ' MH/s');
             $connection->write("$result,$hashRate,PHP_Miner");
         });
 
