@@ -1,0 +1,30 @@
+{
+  "name": "ricardofiorani/duino-php",
+  "type": "project",
+  "require": {
+    "ext-sockets": "^8.0",
+    "react/socket": "^1.6",
+    "php": "^8.0",
+    "monolog/monolog": "^2.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "RicardoFiorani\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "RicardoFiorani\\Tests\\": "tests/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Ricardo Fiorani",
+      "email": "ricardo.fiorani@gmail.com"
+    }
+  ],
+  "description": "BLAAAAA"
+}
