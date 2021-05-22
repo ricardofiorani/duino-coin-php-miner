@@ -105,4 +105,11 @@ while (true) {
     );
 
     $loop->run();
+
+    $logger->alert('Sleeping 60 seconds before trying again...');
+
+    foreach(range(60, 0) as $i ){
+        sleep(1);
+        $logger->info(sprintf('%s seconds before trying again.', $i));
+    }
 }
