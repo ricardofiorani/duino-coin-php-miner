@@ -3,7 +3,7 @@
 namespace RicardoFiorani\Tests\DuinoMiner;
 
 use PHPUnit\Framework\TestCase;
-use RicardoFiorani\DuinoMiner\Miner;
+use RicardoFiorani\DuinoMiner\DucoS1Miner;
 
 class MinerTest extends TestCase
 {
@@ -15,7 +15,7 @@ class MinerTest extends TestCase
         $difficulty = 50000;
         $expectedSolution = 2464655;
 
-        $miner = new Miner();
+        $miner = new DucoS1Miner();
 
         TestCase::assertEquals($expectedSolution, $miner->work($baseHash, $digest, $difficulty));
     }
