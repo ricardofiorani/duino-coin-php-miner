@@ -8,13 +8,20 @@ I'm also not responsible for how you use it.
 I only made this to have some fun and to prove that [PHP 8 is indeed faster than python](https://scand.com/company/blog/php-vs-python/#:~:text=Some%20years%20ago%2C%20Python%20was,speed%20may%20greatly%20improve%20performance.).
 
 # Requirements
-Either Docker (v20) or PHP 8 && Composer installed locally.
+Either Docker (v20) or PHP 8 & Composer installed locally.
 
 # How to use
 First, add your username into the configuration section in the `miner.php` file.
   
-### If you use docker 
-Just run `$ docker compose up`
+### If you use docker
+Run composer install and then run the miner:
+```bash
+$ docker run --rm --interactive --tty \
+  --volume $PWD:/app \
+  composer install
+  
+$ docker compose up
+```
 
 ### If you have PHP 8 installed
 Install dependencies with composer:
