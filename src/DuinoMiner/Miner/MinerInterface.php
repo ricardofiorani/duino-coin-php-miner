@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace RicardoFiorani\DuinoMiner;
+namespace RicardoFiorani\DuinoMiner\Miner;
 
 interface MinerInterface
 {

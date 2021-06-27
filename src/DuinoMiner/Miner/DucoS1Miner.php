@@ -6,7 +6,7 @@
  * @link https://github.com/revoxhere/duino-coin/blob/gh-pages/assets/whitepaper.pdf
  */
 
-namespace RicardoFiorani\DuinoMiner;
+namespace RicardoFiorani\DuinoMiner\Miner;
 
 class DucoS1Miner implements MinerInterface
 {

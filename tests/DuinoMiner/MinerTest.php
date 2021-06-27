@@ -3,7 +3,7 @@
 namespace RicardoFiorani\Tests\DuinoMiner;
 
 use PHPUnit\Framework\TestCase;
-use RicardoFiorani\DuinoMiner\DucoS1Miner;
+use RicardoFiorani\DuinoMiner\Miner\DucoS1Miner;
 
 class MinerTest extends TestCase
 {
