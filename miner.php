@@ -41,9 +41,15 @@ while (true) {
                 $event = array_shift($arguments);
                 $event = str_replace(array("\r", "\n"), '', $event);
 
-                if (in_array($event, ['OK', '2.4', 'GOOD', 'BAD'])) {
+                if (in_array($event, ['OK', 'GOOD', 'BAD'])) {
                     $connection->emit($event, $arguments);
                     $logger->info('EMITTING: ' . $event);
+                    return;
+                }
+
+                if(floatval($event) < 5){
+                    $logger->info('Connected to server version: ' . floatval($event));
+
                     return;
                 }
 
@@ -92,7 +98,7 @@ while (true) {
                 $logger->info('FOUND!', ['result' => $result]);
 
                 $hashRate = $result / ($timeDifference);
-                $logger->info('Current HashRate: ' . round($hashRate / 1000, 2) . ' KH/s');
+                $logger->info('Current HashRate: ' . round($hashRate, 2) . ' H/s');
                 $connection->write("$result,$hashRate,{$miner->getName()}");
             });
 
