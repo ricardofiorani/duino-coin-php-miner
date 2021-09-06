@@ -3,19 +3,19 @@ require __DIR__ . '/vendor/autoload.php';
 
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
-use RicardoFiorani\DuinoMiner\Configuration;
+use RicardoFiorani\DuinoMiner\ConfigurationFactory;
 use RicardoFiorani\DuinoMiner\Logic\DuinoMinerLogic;
 use RicardoFiorani\DuinoMiner\Miner\DucoS1Miner;
 
 /**
  * Configuration
  */
-$poolIp = '51.15.127.80'; //https://raw.githubusercontent.com/revoxhere/duino-coin/gh-pages/serverip.txt
-$poolPort = 2811; //https://raw.githubusercontent.com/revoxhere/duino-coin/gh-pages/serverip.txt
+
+
 $username = 'ricardofiorani';
 
-$configuration = new Configuration("$poolIp:$poolPort", $username);
-
+$configurationFactory = new ConfigurationFactory('https://server.duinocoin.com/getPool');
+$configuration = $configurationFactory->createConfiguration($username);
 /**
  * Logging
  */
