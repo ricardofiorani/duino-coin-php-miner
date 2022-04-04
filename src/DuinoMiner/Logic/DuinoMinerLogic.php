@@ -15,13 +15,13 @@ class DuinoMinerLogic
 {
     public function run(LoggerInterface $logger, LoopInterface $loop, ConnectorInterface $connector, MinerInterface $algorithm, Configuration $configuration)
     {
-        $logger->alert(sprintf('Connecting to %s...', $configuration->getPoolAddress()));
+        $logger->alert(sprintf('Connecting to %s...', $configuration->getPool()->getDescriptiveName()));
 
-        $connector->connect($configuration->getPoolAddress())->then(
+        $connector->connect($configuration->getPool()->getAddress())->then(
             function (ConnectionInterface $connection) use ($logger, $algorithm, $configuration) {
                 // connection successfully established
                 $connection->on('data', function ($data) use ($connection, $logger) {
-                    $logger->info('SERVER SENT DATA', [$data]);
+                    $logger->info('POOL SENT DATA', [$data]);
 
                     $arguments = explode(',', $data);
                     $event = array_shift($arguments);
@@ -37,7 +37,7 @@ class DuinoMinerLogic
                     $miningArguments = explode(',', $data);
 
                     if (count($miningArguments) < 2) {
-                        $logger->info('Connected to server version: ' . floatval($event));
+                        $logger->info('Connected to pool version: ' . floatval($event));
 
                         return;
                     }
@@ -50,18 +50,23 @@ class DuinoMinerLogic
                     $logger->warning('[SOCKET CLOSED]');
                 });
 
-                //Based on server response
+                //Based on pool response
                 $connection->on('OK', function () use ($connection) {
                     $connection->emit('TIME_FOR_NEW_JOB');
                 });
 
                 $connection->on('TIME_FOR_NEW_JOB', function () use ($connection, $configuration, $logger) {
-                    $logger->info('Asking server for a new job...');
+                    $logger->info('Asking pool for a new job...');
                     $connection->write(sprintf("JOB,%s,MEDIUM", $configuration->getUsername()));
                 });
 
                 $connection->on('GOOD', function () use ($connection, $logger) {
                     $logger->info('Share Accepted!');
+                    $connection->emit('TIME_FOR_NEW_JOB');
+                });
+
+                $connection->on('BLOCK', function () use ($connection, $logger) {
+                    $logger->info('Block FOUND');
                     $connection->emit('TIME_FOR_NEW_JOB');
                 });
 

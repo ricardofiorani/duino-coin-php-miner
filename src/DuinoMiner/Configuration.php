@@ -2,20 +2,22 @@
 
 namespace RicardoFiorani\DuinoMiner;
 
+use RicardoFiorani\DuinoMiner\Connectivity\Pool;
+
 class Configuration
 {
-    private string $poolAddress;
+    private Pool $pool;
     private string $username;
 
-    public function __construct(string $poolAddress, string $username)
+    public function __construct(Pool $pool, string $username)
     {
-        $this->poolAddress = $poolAddress;
+        $this->pool = $pool;
         $this->username = $username;
     }
 
-    public function getPoolAddress(): string
+    public function getPool(): Pool
     {
-        return $this->poolAddress;
+        return $this->pool;
     }
 
     public function getUsername(): string
